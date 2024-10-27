@@ -6,7 +6,7 @@ import requests
 import random
 from discord.ext import commands
 
-url = "https://fish-species.p.rapidapi.com/fish_api/group"
+url = "REDACTED"
 querystring = {
     "meta_property": "scientific_classification",
     "property_value": "actinopterygii",
@@ -14,7 +14,7 @@ querystring = {
 }
 
 headers = {
-    "x-rapidapi-key": "87777dd756mshc7ac70d44b76848p160cc6jsn7f03e24e7d57",
+    "x-rapidapi-key": "REDACTED",
     "x-rapidapi-host": "fish-species.p.rapidapi.com"
 }
 
