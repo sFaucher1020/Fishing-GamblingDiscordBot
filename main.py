@@ -43,27 +43,26 @@ async def castA_Rod(interaction: discord.Interaction):
 
     if response.status_code == 200:
         data = response.json()
-
-        # Select a random fish from the data
+        
         randID = random.randint(1, 1100)
         randCost = random.randint(1, 9999)
         species = ""
         photoURL = ""
 
         for fish in data:
-            if fish.get("id") == randID:  # Adjust "id" to match the actual key in your response
-                species = fish.get("name")  # Adjust "name" if the field name is different
+            if fish.get("id") == randID: 
+                species = fish.get("name")
                 photoURL = fish.get("img_src_set", {}).get("2x")
                 break
 
         user_id = interaction.user.id
         if user_id not in user_bal:
-            user_bal[user_id] = 0  # Initialize user balance if not present
+            user_bal[user_id] = 0 
 
         if species and photoURL:
             user_bal[user_id] += randCost
-            embed = discord.Embed(title=f'You caught a {species}!', color=0x088F8F)  # Set the embed color
-            embed.set_image(url=photoURL)  # Set the image URL
+            embed = discord.Embed(title=f'You caught a {species}!', color=0x088F8F)
+            embed.set_image(url=photoURL)
             embed.add_field(name='Value', value=f'${randCost}', inline=True)
             embed.add_field(name='New Balance', value=f'${user_bal[user_id]}', inline=True)
 
@@ -77,7 +76,7 @@ async def castA_Rod(interaction: discord.Interaction):
             elif randCost >= 500:
                 embed.add_field(name='Rarity', value='This catch is... Well, it\'s something!', inline=False)
 
-            await interaction.response.send_message(embed=embed)  # Send the embed
+            await interaction.response.send_message(embed=embed)
         else:
             await interaction.response.send_message("You caught nothing.")
     else:
@@ -87,7 +86,7 @@ async def castA_Rod(interaction: discord.Interaction):
 async def gambaTime(interaction: discord.Interaction):
     user_id = interaction.user.id
     if user_id not in user_bal:
-        user_bal[user_id] = 0  # Initialize if not present
+        user_bal[user_id] = 0
 
     if user_bal[user_id] != 0:
         fiftyfifty = random.randint(1, 100)
@@ -107,7 +106,7 @@ async def gambaTime(interaction: discord.Interaction):
 async def cheddarChecker(interaction: discord.Interaction):
     user_id = interaction.user.id
     if user_id not in user_bal:
-        user_bal[user_id] = 0  # Initialize if not present
+        user_bal[user_id] = 0
 
     await interaction.response.send_message(f'You currently have ${user_bal[user_id]}')
 
